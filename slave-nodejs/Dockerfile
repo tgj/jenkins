@@ -13,10 +13,10 @@ COPY contrib/bin/scl_enable /usr/local/bin/scl_enable
 
 # Install NodeJS and Yarn
 RUN yum install -y centos-release-scl-rh && \
-    INSTALL_PKGS="rh-nodejs4 rh-nodejs4-npm rh-nodejs4-nodejs-nodemon yarn" && \
+    INSTALL_PKGS="rh-nodejs8 rh-nodejs8-npm rh-nodejs8-nodejs-nodemon yarn" && \
     ln -s /usr/lib/node_modules/nodemon/bin/nodemon.js /usr/bin/nodemon && \
     curl -sL https://dl.yarnpkg.com/rpm/yarn.repo -o /etc/yum.repos.d/yarn.repo && \
-    curl -sL https://rpm.nodesource.com/setup_6.x | bash - && \
+    curl -sL https://rpm.nodesource.com/setup_8.x | bash - && \
     yum install -y --setopt=tsflags=nodocs $INSTALL_PKGS && \
     rpm -V $INSTALL_PKGS && \
     yum clean all -y
