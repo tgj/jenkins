@@ -19,6 +19,10 @@ RUN yum install -y centos-release-scl-rh && \
     rpm -V $INSTALL_PKGS && \
     yum clean all -y
 
+# Install Yarn
+RUN curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | sudo tee /etc/yum.repos.d/yarn.repo && \
+    yum install yarn
+
 RUN chown -R 1001:0 $HOME && \
     chmod -R g+rw $HOME
 
