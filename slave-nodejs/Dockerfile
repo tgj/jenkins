@@ -11,6 +11,11 @@ ENV NODEJS_VERSION=4.4 \
 
 COPY contrib/bin/scl_enable /usr/local/bin/scl_enable
 
+# Install Yarn
+RUN curl -sL https://dl.yarnpkg.com/rpm/yarn.repo -o /etc/yum.repos.d/yarn.repo && \
+    curl -sL https://rpm.nodesource.com/setup_6.x | bash -
+    yum install yarn
+    
 # Install NodeJS
 RUN yum install -y centos-release-scl-rh && \
     INSTALL_PKGS="rh-nodejs4 rh-nodejs4-npm rh-nodejs4-nodejs-nodemon" && \
@@ -18,10 +23,6 @@ RUN yum install -y centos-release-scl-rh && \
     yum install -y --setopt=tsflags=nodocs $INSTALL_PKGS && \
     rpm -V $INSTALL_PKGS && \
     yum clean all -y
-
-# Install Yarn
-RUN curl -sL https://dl.yarnpkg.com/rpm/yarn.repo -o /etc/yum.repos.d/yarn.repo && \
-    yum install yarn
 
 RUN chown -R 1001:0 $HOME && \
     chmod -R g+rw $HOME
